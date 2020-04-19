@@ -22,9 +22,9 @@ for dir in $from_dirs;do
 	name=$(basename $dir)
 	if [[ ! -e $name ]];then
 		echo "$name found, copying"
-		#/bin/cp -af $dir .
+		/bin/cp -af $dir .
 		# remove vs files
-		#/bin/rm -fr $dir/*.vcxproj*
+		/bin/rm -fr $dir/*.vcxproj*
 		echo "$name copy done"
 	fi
 	echo "$name making"
