@@ -1,24 +1,44 @@
-#!/bin/bash -e
-# copy and make code from Johnson9009
-# requre a number
-# make in MSYS
+#!/bin/bash
+# make dirs in MSYS
+# requre a prefix
+# make all match *_* if prefix=all
+# if the dir is not found, try to copy it from Johnson9009
 
 source ~/.bash_profile
 basepath=$(cd `dirname $0`; pwd)
+
+# check template cmake file
 template_cmake=$basepath/template.cmake
 if [[ ! -e $template_cmake ]];then
 	echo "Tempate cmake file $template_cmake is not found!"
 	exit 2
 fi
-num=$1
 
-from_dir=$(realpath $basepath/../../Johnson9009/CodingInterviewChinese2/${num}_*/)
-from_dirs=$(ls -d $from_dir 2>/dev/null)
-if [[ $? -ne 0 ]];then
-	echo "No files found in $from_dir"
-	exit 2
+prefix=$1
+
+# check current dir
+all_dirs=$(ls -d ${prefix}_* 2>/dev/null)
+if [[ -z $all_dirs ]];then
+	if [[ $prefix = all ]];then
+		# find all dirs
+		all_dirs=$(ls -d *_* 2>/dev/null)
+		if [[ -z $all_dirs ]];then
+			echo "no dir match with *_*"
+			exit 2
+		fi
+	else
+		# find in Johnson9009 dir
+		from_dir=$(realpath $basepath/../../Johnson9009/CodingInterviewChinese2/${prefix}_*/)
+		all_dirs=$(ls -d $from_dir 2>/dev/null)
+		if [[ -z $all_dirs ]];then
+			echo "No dir match with $from_dir"
+			exit 2
+		fi
+	fi
 fi
-for dir in $from_dirs;do
+
+# copy and make
+for dir in $all_dirs;do
 	name=$(basename $dir)
 	if [[ ! -e $name ]];then
 		echo "$name found, copying"
