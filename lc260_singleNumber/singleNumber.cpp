@@ -1,9 +1,16 @@
+/*******************************************************************
+Copyright (c) 2018 Hacky DH
+
+This file is distributed under MIT License.
+See the LICENSE file for details.
+*******************************************************************/
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
 /*
+260. Single Number III
 Given an array of numbers nums, in which exactly two elements appear only once
 and all the other elements appear exactly twice.
 Find the two elements that appear only once.
