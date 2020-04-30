@@ -55,20 +55,37 @@ public:
         }
         return -1;
     }
+
+    // more short
+    int search2(vector<int>& nums, int target) {
+        int start=0, end=nums.size()-1, mid;
+        while(start <= end) {
+            mid = start + (end - start) / 2;
+            if(nums[mid] == target) return mid;
+            // go second part when m<t t<s m<s all is true
+            // or only one of first two is true
+            if((nums[mid] < target) ^ (target < nums[start]) ^ (nums[mid] < nums[start])) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return -1;
+    }
 };
 
 
 int main(int argc, char* argv[]) {
     Solution s;
-    //vector<int> nums = {4,5,6,7,0,1,2};
-    vector<int> nums = {6, 2, 4};
+    vector<int> nums = {4,5,6,7,0,1,2};
+    //vector<int> nums = {6, 2, 4};
     bool pass = true;
     for(int i=0; i < nums.size(); ++i) {
-        auto res = s.search(nums, nums[i]);
+        auto res = s.search2(nums, nums[i]);
         pass = res == i;
         if(!pass) break;
     }
-    pass = -1 == s.search(nums, 8);
+    pass = -1 == s.search2(nums, 8);
     if(pass)
         cout<<"Passed"<<endl;
     else
