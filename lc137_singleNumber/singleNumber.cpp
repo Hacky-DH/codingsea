@@ -1,5 +1,5 @@
 /*******************************************************************
-Copyright (c) 2018 Hacky DH
+Copyright (c) 2020 Hacky DH
 
 This file is distributed under MIT License.
 See the LICENSE file for details.
