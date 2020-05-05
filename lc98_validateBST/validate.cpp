@@ -51,9 +51,29 @@ public:
             cur = st.top();
             st.pop();
             if(pre != nullptr && *pre >= cur->val)
-            	return false;
+                return false;
             pre = &cur->val;
             cur = cur->right;
+        }
+        return true;
+    }
+
+    // more simple inorder
+    bool isValidBST2(TreeNode* root) {
+        stack<TreeNode*> st;
+        int *pre = nullptr;
+        while(!st.empty() || root != nullptr) {
+            if(root != nullptr) {
+                st.push(root);
+                root = root->left;
+            } else {
+                root = st.top();
+                st.pop();
+                if(pre != nullptr && *pre >= root->val)
+                    return false;
+                pre = &root->val;
+                root = root->right;
+            }
         }
         return true;
     }
