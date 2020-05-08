@@ -22,6 +22,18 @@ Constraints:
 Each string consists only of '0' or '1' characters.
 1 <= a.length, b.length <= 10^4
 Each string is either "0" or doesn't contain any leading zero.
+
+
+415. Add Strings
+Given two non-negative integers num1 and num2 represented as string,
+return the sum of num1 and num2.
+
+Note:
+The length of both num1 and num2 is < 5100.
+Both num1 and num2 contains only digits 0-9.
+Both num1 and num2 does not contain any leading zero.
+You must not use any built-in BigInteger library or
+convert the inputs to integer directly.
 */
 
 #include <iostream>
@@ -58,6 +70,22 @@ public:
         }
         if(c) a = '1'+a;
         return a;
+    }
+
+    string addStrings(string num1, string num2) {
+        if(num1.size() > num2.size()) return addStrings(num2, num1);
+        else if(num1.size() < num2.size()) {
+            int t = num2.size() - num1.size();
+            while(t--) num1 = '0' + num1;
+        }
+        int c = 0, tmp;
+        for(int i=num1.size()-1; i>=0; --i) {
+            tmp = num1[i] + num2[i] - '0' - '0' + c;
+            num1[i] = (tmp % 10) + '0';
+            c = tmp / 10;
+        }
+        if(c!=0) num1 = '1' + num1;
+        return num1;
     }
 };
 
