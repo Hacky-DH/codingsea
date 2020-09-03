@@ -52,7 +52,7 @@ public:
     	}
     	vector<int> res;
     	if(ca>nums.size()/3) res.push_back(a);
-    	if(cb>nums.size()/3) res.push_back(b);
+    	if(cb>nums.size()/3 && a != b) res.push_back(b);
     	return res;
     }
 };
