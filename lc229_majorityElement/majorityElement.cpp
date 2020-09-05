@@ -35,35 +35,35 @@ static bool init = []()
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-    	int a=0,b=0,ca=0,cb=0;
-    	for(auto num : nums){
-    		if((ca==0||num==a)&&num!=b){
-    			++ca; a=num;
-    		}else if(cb==0||num==b) {
-    			++cb; b=num;
-    		}else {
-    			--ca;--cb;
-    		}
-    	}
-    	ca=0,cb=0;
-    	for(auto num : nums){
-    		if(num==a) ++ca;
-    		if(num==b) ++cb;
-    	}
-    	vector<int> res;
-    	if(ca>nums.size()/3) res.push_back(a);
-    	if(cb>nums.size()/3 && a != b) res.push_back(b);
-    	return res;
+        int a=0,b=0,ca=0,cb=0;
+        for(auto num : nums){
+            if((ca==0||num==a)&&num!=b){
+                ++ca; a=num;
+            }else if(cb==0||num==b) {
+                ++cb; b=num;
+            }else {
+                --ca;--cb;
+            }
+        }
+        ca=0,cb=0;
+        for(auto num : nums){
+            if(num==a) ++ca;
+            if(num==b) ++cb;
+        }
+        vector<int> res;
+        if(ca>nums.size()/3) res.push_back(a);
+        if(cb>nums.size()/3 && a != b) res.push_back(b);
+        return res;
     }
 };
 
 int main(int argc, char* argv[]) {
-	Solution s;
-	vector<int> nums{1,2,1,1,3,2,3,2};
-	vector<int> exp{1,2};
-	vector<int> res = s.majorityElement(nums);
-	if(equal(exp.begin(), exp.end(), res.begin())){
-		cout<<"Pass"<<endl;
-	}
+    Solution s;
+    vector<int> nums{1,2,1,1,3,2,3,2};
+    vector<int> exp{1,2};
+    vector<int> res = s.majorityElement(nums);
+    if(equal(exp.begin(), exp.end(), res.begin())){
+        cout<<"Pass"<<endl;
+    }
     return 0;
 }
