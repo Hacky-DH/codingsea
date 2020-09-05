@@ -74,23 +74,37 @@ static bool init = []()
 class Solution1 {
 public:
     int numRookCaptures(vector<vector<char>>& board) {
-    	int x,y;
+        int x,y;
         for(x=0;x<board.size();++x) {
             for(y=0;y<board[x].size();++y) {
-                return capOneDirection() +
-                capOneDirection() +
-                capOneDirection() +
-                capOneDirection();
+                if(board[x][y]=='R')
+                    return capOneDirection(board, x, y, 0, 1) +
+                        capOneDirection(board, x, y, 0, -1) +
+                        capOneDirection(board, x, y, 1, 0) +
+                        capOneDirection(board, x, y, -1, 0);
             }
         }
+        return 0;
     }
-    int capOneDirection() {
-
+    int capOneDirection(vector<vector<char>>& board,
+        int x,int y,int dx,int dy) {
+        while(true) {
+            x+=dx;
+            y+=dy;
+            if(x<0 || x>=board.size() ||
+                y<0 || y>=board.size())
+                break;
+            if(board[x][y]=='p')
+                return 1;
+            if(board[x][y]=='B')
+                break;
+        }
+        return 0;
     }
 };
 
 // more code
-class Solution1 {
+class Solution2 {
 public:
     int numRookCaptures(vector<vector<char>>& board) {
         int x,y,rx=0,ry=0,xx;
